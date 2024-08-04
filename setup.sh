@@ -128,7 +128,7 @@ else
     # Add SSH key to config
     touch ~/.ssh/config
     if ! string_in_file "IdentityFile ${RSA_PATH}" ~/.ssh/config; then
-        echo -e "\n\nHost *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile $RSA_PATH\n\n" >> ~/.ssh/config
+        echo -e "\n\nHost *\n AddKeysToAgent yes\n IdentityFile $RSA_PATH\n\n" >> ~/.ssh/config
         logC "SSH config updated"
     fi
 
@@ -144,8 +144,8 @@ logN "Copying SSH Public Key to clipboard \nUse this key to add to your GitHub a
 pbcopy < ${RSA_PATH}.pub
 
 logN $(cat <<EOF
-Your browser will be opened to a GitHub SSH Keys settings page
-You’ll need to paste into the 'Key' field, then click the 'Add SSK Key' button
+Your browser will be opened to a GitHub SSH Keys settings page\n
+You’ll need to paste into the 'Key' field, then click the 'Add SSK Key' button\n
 Then, click 'Enable SSO' for that key.
 EOF
 )
