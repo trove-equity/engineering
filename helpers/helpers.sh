@@ -131,7 +131,7 @@ log() {
 }
 
 # log plain with sudo refresh
-logS() {
+logP() {
   STRAP_STEP="$*"
   sudo_refresh
   printf -- "\n%b\n" "$*"
