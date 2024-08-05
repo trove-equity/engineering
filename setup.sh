@@ -64,6 +64,7 @@ fi
 EOF
 )
     echo "${BREWPATH}" >> ${PROFILE}
+    eval $(/opt/homebrew/bin/brew shellenv)
     logC "Homebrew added to PATH"
 else
     logS "Homebrew already in PATH"
