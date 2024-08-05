@@ -1,1 +1,3 @@
 Brewfile.lock.json
+.ssh_key_path
+.git_configured
