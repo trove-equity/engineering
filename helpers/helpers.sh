@@ -114,8 +114,12 @@ shell_profile() {
 
   if [ -n "$PROFILE" ]; then
     export PROFILE
-  else
-    abort "!!! Cannot find profile file"
+  elif $(echo $0 | grep bash > /dev/null); then
+      PROFILE="$HOME/.bashrc"
+      touch $PROFILE
+  elif $(echo $0 | grep zsh > /dev/null); then
+      PROFILE="$HOME/.zprofile"
+      touch $PROFILE
   fi
 }
 
