@@ -102,6 +102,14 @@ shell_profile() {
       PROFILE="$HOME/.zprofile"
   elif [ -f "$HOME/.zshrc" ]; then
       PROFILE="$HOME/.zshrc"
+  elif [ "$SHELL" == "/bin/bash" ]; then
+      echo "detected bash shell"
+      PROFILE="$HOME/.bashrc"
+      touch $PROFILE
+  elif [ "$SHELL" == "/bin/zsh" ]; then
+      echo "detected zsh shell"
+      PROFILE="$HOME/.zshrc"
+      touch $PROFILE
   fi
 
   if [ -n "$PROFILE" ]; then
