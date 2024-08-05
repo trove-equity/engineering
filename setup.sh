@@ -49,6 +49,7 @@ fi
 if ! command_exists brew; then
     logN "Installing Homebrew"
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval $(/opt/homebrew/bin/brew shellenv)
     logC "Homebrew installed"
 else
     logS "Homebrew already installed"
