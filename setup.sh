@@ -73,6 +73,7 @@ fi
 
 # Update Homebrew
 logN "Updating Homebrew"
+eval $(/opt/homebrew/bin/brew shellenv)
 brew update --quiet
 logC "Homebrew updated"
 
