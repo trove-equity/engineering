@@ -46,7 +46,7 @@ fi
 
 
 # Install Homebrew
-if ! [ -f /opt/homebrew/bin/brew ]; then
+if ! command_exists brew; then
     logN "Installing Homebrew"
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     logC "Homebrew installed"
@@ -64,7 +64,6 @@ fi
 EOF
 )
     echo "${BREWPATH}" >> ${PROFILE}
-    eval $(/opt/homebrew/bin/brew shellenv)
     logC "Homebrew added to PATH"
 else
     logS "Homebrew already in PATH"
