@@ -20,6 +20,7 @@ Before running the setup script, ensure you have the following:
 
 - A GitHub account
 - A Mac laptop
+- Ensure you have Chrome set as your default broswer 
 
 ## Setup Instructions
 
