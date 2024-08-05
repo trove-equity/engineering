@@ -109,7 +109,7 @@ shell_profile() {
     export PROFILE
   else
     touch "$HOME/.zprofile"
-    PROFILE="$HOME/.zprofile"
+    export PROFILE="$HOME/.zprofile"
     logN "No shell profile found. Created $PROFILE"
   fi
 }
