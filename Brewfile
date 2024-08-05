@@ -6,4 +6,3 @@ brew 'podman-compose'
 
 cask 'google-cloud-sdk'
 cask 'podman-desktop'
-cask 'visual-studio-code'

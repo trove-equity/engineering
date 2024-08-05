@@ -82,6 +82,13 @@ logN "Installing Brewfile"
 brew bundle --file=./Brewfile
 logC "Brewfile installed"
 
+# Install VSCode separately (if required)
+if ! [ -d "/Applications/Visual Studio Code.app" ]; then
+    brew install --cask 'visual-studio-code'
+    logC "VSCode installed via Brew"
+else
+    logS "VSCode already installed"
+fi
 
 # Add gcloud to PATH
 if ! string_in_file 'google-cloud-sdk' ${PROFILE} ; then
