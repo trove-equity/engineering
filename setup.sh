@@ -38,7 +38,7 @@ fi
 
 # Install Xcode Command Line Tools
 if ! [ -f "/Library/Developer/CommandLineTools/usr/bin/git" ]; then
-    logn "Installing Xcode Command Line Tools"
+    logN "Installing Xcode Command Line Tools"
     xcode-select --install
 else
     logS "Xcode Command Line Tools already installed"
