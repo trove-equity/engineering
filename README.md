@@ -1,11 +1,6 @@
 # Local Development Pre-Setup Script
 
-Welcome to the Pave Engineering pre-setup repository. This script will install the necessary tools before you can run the local development setup process. 
-
-## Covered By Script
-
-The script will install and configure the following services for you:
-
+Welcome to the Pave Engineering pre-setup repository. This script will install the necessary tools before you can run the local development setup process, including:
 - Brew
 - Podman
 - Visual Studio Code
@@ -35,7 +30,6 @@ Follow these steps to run the setup script:
    ```bash
    ./setup.sh
    ```
-   You will be prompted to enter your laptop password during the installation process.
 
 3. **Follow the On-Screen Instructions**:
    
@@ -46,9 +40,7 @@ Follow these steps to run the setup script:
    prompt after that step to continue the setup.
 
 ## Troubleshooting
-If you encounter any issues during the setup process, here are some common solutions:
+Common problems:
+- Permission Issues: Make sure you have the necessary permissions to run the script and install software on your laptop.
 
-Permission Issues: Make sure you have the necessary permissions to run the script and install software on your laptop.
-
-## Contact Information
-If you encounter any issues that are not covered in this guide, please notify the Dev Platform Team for further assistance.
+Otherwise, please reach out to the Developer Platform team if you get stuck! 
