@@ -114,14 +114,14 @@ DEFAULT_RSA_PATH=~/.ssh/id_rsa
 logN "Where would you like to save your SSH key? (default: ${DEFAULT_RSA_PATH})"
 read -p "Enter path: " RSA_PATH
 
+if [[ -z ${RSA_PATH} ]]; then
+    RSA_PATH=${DEFAULT_RSA_PATH}
+fi
+
 # Check if key already exists
 if [[ -f ${RSA_PATH} ]]; then
     logS "SSH key already exists"
 else
-    if [[ -z ${RSA_PATH} ]]; then
-        RSA_PATH=${DEFAULT_RSA_PATH}
-    fi
-
     while true; do
         logN "Please enter your Pave email to associate with your SSH key?"
         read -p "Enter email: " EMAIL </dev/tty || {
