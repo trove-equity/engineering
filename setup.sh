@@ -152,7 +152,7 @@ else
 
     # Add SSH key to ssh-agent
     logN "Adding SSH key to ssh-agent"
-    ssh-add -K $rsa_path
+    ssh-add -K $RSA_PATH
     logC "SSH key added to ssh-agent"
 fi
 
