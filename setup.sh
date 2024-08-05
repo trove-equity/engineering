@@ -70,6 +70,8 @@ else
     logS "Homebrew already in PATH"
 fi
 
+# Ensure homebrew is installed in this shell
+eval $(/opt/homebrew/bin/brew shellenv)
 
 # Update Homebrew
 logN "Updating Homebrew"
