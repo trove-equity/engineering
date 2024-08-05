@@ -122,21 +122,21 @@ fi
 if [[ -f ${RSA_PATH} ]]; then
     logS "SSH key already exists"
 else
-    while true; do
-        logN "Please enter your Pave email to associate with your SSH key?"
-        read -p "Enter email: " EMAIL </dev/tty || {
-            EMAIL=""
-        }
-
-        if [[ -z ${EMAIL} ]]; then
-            logA "Email cannot be empty"
-        else
-            break
-        fi
-    done
-
     logN "Generating SSH key"
     if [[ ! -f ${RSA_PATH} ]]; then
+        while true; do
+            logN "Please enter your Pave email to associate with your SSH key?"
+            read -p "Enter email: " EMAIL </dev/tty || {
+                EMAIL=""
+            }
+
+            if [[ -z ${EMAIL} ]]; then
+                logA "Email cannot be empty"
+            else
+                break
+            fi
+        done
+
         ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f ${RSA_PATH}
         logC "SSH key generated"
     else
