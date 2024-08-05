@@ -4,7 +4,7 @@ Welcome to the Pave Engineering pre-setup repository. This script will install t
 
 ## Covered By Script
 
-The sript will install and configure the following services for you:
+The script will install and configure the following services for you:
 
 - Brew
 - Podman
