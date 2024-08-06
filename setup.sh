@@ -2,9 +2,6 @@
 set -e
 source helpers/helpers.sh
 
-# Set the profile file, see helpers/helpers.sh
-shell_profile
-
 # Intro message
 INTRO_MESSAGE=$(cat <<EOF
 
@@ -12,7 +9,8 @@ Welcome to the local development pre-setup script. This script will install the
 necessary tools before you can run the local dev setup process. You will be prompted
 for your laptop password during the installation process.
 
-Please make sure that you have a Github account before proceeding.
+Please make sure that you have a Github account before proceeding. Also make sure to
+authenticate to your Github account via Okta.
 
 If you encounter any issues, please notify the Dev Platform Team.\n
 EOF
@@ -24,6 +22,10 @@ read -p "Press enter to continue"
 sudo --reset-timestamp
 echo
 sudo_refresh
+
+
+# Set the profile file, see helpers/helpers.sh
+shell_profile
 
 
 # Install Rosetta 2 for Apple Silicon (M1) Macs
@@ -83,6 +85,7 @@ logN "Installing Brewfile"
 brew bundle --file=./Brewfile
 logC "Brewfile installed"
 
+
 # Install VSCode separately (if required)
 if ! [ -d "/Applications/Visual Studio Code.app" ]; then
     brew install --cask 'visual-studio-code'
@@ -90,6 +93,7 @@ if ! [ -d "/Applications/Visual Studio Code.app" ]; then
 else
     logS "VSCode already installed"
 fi
+
 
 # Add gcloud to PATH
 if ! string_in_file 'google-cloud-sdk' ${PROFILE} ; then
@@ -123,6 +127,7 @@ else
     fi
 fi
 
+
 # Check if key already exists
 if [[ -f ${RSA_PATH} ]]; then
     logS "SSH key already exists"
@@ -147,12 +152,14 @@ else
 fi
 echo "$RSA_PATH" > ./.ssh_key_path
 
+
 # Add SSH key to config
 touch ~/.ssh/config
 if ! string_in_file "IdentityFile ${RSA_PATH}" ~/.ssh/config; then
     echo -e "\n\nHost *\n AddKeysToAgent yes\n IdentityFile $RSA_PATH\n\n" >> ~/.ssh/config
     logC "SSH config updated"
 fi
+
 
 # Add SSH key to ssh-agent
 logN "Adding SSH key to ssh-agent"
@@ -167,12 +174,13 @@ else
     logN "Copying SSH Public Key to clipboard \nUse this key to add to your GitHub account in the next step"
     pbcopy < ${RSA_PATH}.pub
 
-    logN $(cat <<EOF
-Your browser will be opened to a GitHub SSH Keys settings page\n
-You’ll need to paste into the 'Key' field, then click the 'Add SSK Key' button\n
-Then, click 'Enable SSO' for that key.
+    GIT_MESSAGE=$(cat <<EOF
+Your browser will be opened to a GitHub SSH Keys settings page\nYou'll need to paste into the 'Key' field, then click the 'Add SSH Key' button.\n\nAfter your key is added, click 'Enable SSO' for that key. If you don't see the 'Enable SSO'\nbutton, you may need to authenticate your account via Okta first.
 EOF
-    )
+)
+
+    logN ${GIT_MESSAGE}
+
     read -p "Press enter to continue"
 
     open https://github.com/settings/ssh/new
@@ -191,10 +199,11 @@ EOF
 fi
 
 # Setup Complete
-logC $(cat <<EOF
-Setup complete! 
-You can now proceed with the local development setup process.
+COMPLETED_MESSAGE=$(cat <<EOF
+Setup complete!\nYou can now proceed with the local development setup process.\n\nNext step is cloning the application repo and running the\nsetup_local_dev.sh script before using the local dev environment.
 EOF
 )
+
+logC ${COMPLETED_MESSAGE}
 
 SETUP_SUCCESS=1
