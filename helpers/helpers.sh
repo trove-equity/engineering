@@ -91,15 +91,20 @@ sudo_refresh() {
 # Setup shell profile for zsh
 shell_profile() {
   if ! [ -f ${HOME}/.zshrc ]; then
+    logN "Checking for zshrc file"
     touch "$HOME/.zshrc"
     logN "No shell profile found. Created $HOME/.zshrc"
+  else
+    logS "zshrc file found"
   fi
 
   if ! [ -f ${HOME}/.zprofile ]; then
+    logN "Checking for zprofile file"
     touch "$HOME/.zprofile"
     export PROFILE="$HOME/.zprofile"
     logN "No shell profile found. Created $PROFILE"
   else
+    logS "zprofile file found"
     export PROFILE="$HOME/.zprofile"
   fi
 }

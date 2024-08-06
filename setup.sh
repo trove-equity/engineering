@@ -2,9 +2,6 @@
 set -e
 source helpers/helpers.sh
 
-# Set the profile file, see helpers/helpers.sh
-shell_profile
-
 # Intro message
 INTRO_MESSAGE=$(cat <<EOF
 
@@ -25,6 +22,10 @@ read -p "Press enter to continue"
 sudo --reset-timestamp
 echo
 sudo_refresh
+
+
+# Set the profile file, see helpers/helpers.sh
+shell_profile
 
 
 # Install Rosetta 2 for Apple Silicon (M1) Macs
