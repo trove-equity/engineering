@@ -3,6 +3,7 @@ brew 'git'
 brew 'jq'
 brew 'podman'
 brew 'podman-compose'
+brew 'pnpm'
 
 cask 'google-cloud-sdk'
 cask 'podman-desktop'
