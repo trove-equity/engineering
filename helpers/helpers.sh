@@ -23,14 +23,14 @@ function confirmYesNo {
     m=$1
   fi
   read -r -p "$m ($Y/$N)? " -n 1 m
+  echo  # Move to a new line after read
   case $m in
-    Y|y) ans=y; echo;;
-    N|n) ans=n; echo;;
-     '') ans=$d;;
-      *) ans='error'; echo;;
+    Y|y) echo 'y';;
+    N|n) echo 'n';;
+     '') echo "$d";;
+      *) echo 'error';;
   esac
 }
-
 
 sudo_askpass() {
   if [ -n "$SUDO_ASKPASS" ]; then
@@ -170,8 +170,12 @@ command_exists() {
 SETUP_SUCCESS=""
 cleanup() {
   set +e
-  sudo_askpass rm -rf "$SUDO_ASKPASS" "$SUDO_ASKPASS_DIR"
-  sudo --reset-timestamp
+
+  if [[ -n $sudo_set ]]; then
+    sudo_askpass rm -rf "$SUDO_ASKPASS" "$SUDO_ASKPASS_DIR"
+    sudo --reset-timestamp
+  fi
+  
   if [ -z "$SETUP_SUCCESS" ]; then
     if [ -n "$SETUP_STEP" ]; then
       logA "!!! $SETUP_STEP FAILED"
