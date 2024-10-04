@@ -23,12 +23,11 @@ function confirmYesNo {
     m=$1
   fi
   read -r -p "$m ($Y/$N)? " -n 1 m
-  echo  # Move to a new line after read
   case $m in
-    Y|y) echo 'y';;
-    N|n) echo 'n';;
-     '') echo "$d";;
-      *) echo 'error';;
+    Y|y) ans=y; echo;;
+    N|n) ans=n; echo;;
+     '') ans=$d;;
+      *) ans='error'; echo;;
   esac
 }
 
