@@ -171,7 +171,7 @@ SETUP_SUCCESS=""
 cleanup() {
   set +e
 
-  if [[ -z $sudo_set ]]; then
+  if [[ -n $sudo_set ]]; then
     sudo_askpass rm -rf "$SUDO_ASKPASS" "$SUDO_ASKPASS_DIR"
     sudo --reset-timestamp
   fi

@@ -22,6 +22,7 @@ read -p "Press enter to continue"
 sudo --reset-timestamp
 echo
 sudo_refresh
+sudo_set=true
 
 
 # Set the profile file, see helpers/helpers.sh
