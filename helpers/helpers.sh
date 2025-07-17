@@ -137,7 +137,6 @@ logP() {
 # log notification
 logN() {
   SETUP_STEP="$*"
-  sudo_refresh
   printf -- "\n${YELLOW}%b${NC}\n" "$*"
 }
 
