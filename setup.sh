@@ -176,7 +176,9 @@ else
     pbcopy < ${RSA_PATH}.pub
 
     GIT_MESSAGE=$(cat <<EOF
-Your browser will be opened to a GitHub SSH Keys settings page\nYou'll need to paste into the 'Key' field, then click the 'Add SSH Key' button.\n\nAfter your key is added, click 'Enable SSO' for that key. If you don't see the 'Enable SSO'\nbutton, you may need to authenticate your account via Okta first.
+Your default web browser will be opened to a GitHub settings page for adding a new SSH key.
+Follow these instructions starting on step 5 (paste the key into the 'Key' field, which should already be copied into your clipboard): https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account\n
+Then, follow these instructions to authorize the SSH key for use with SSO: https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-an-ssh-key-for-use-with-single-sign-on#authorizing-an-ssh-key\n
 EOF
 )
 
