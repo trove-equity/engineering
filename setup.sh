@@ -128,6 +128,8 @@ else
     fi
 fi
 
+RSA_PATH=$(expand_tilde "${RSA_PATH}")
+
 
 # Check if key already exists
 if [[ -f ${RSA_PATH} ]]; then
@@ -147,7 +149,8 @@ else
         fi
     done
 
-    ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f ${RSA_PATH}
+    ensure_dir "$(dirname "${RSA_PATH}")"
+    ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f "${RSA_PATH}"
     
     logC "SSH key generated"
 fi
@@ -155,6 +158,7 @@ echo "$RSA_PATH" > ./.ssh_key_path
 
 
 # Add SSH key to config
+ensure_dir ~/.ssh
 touch ~/.ssh/config
 if ! string_in_file "IdentityFile ${RSA_PATH}" ~/.ssh/config; then
     echo -e "\n\nHost *\n AddKeysToAgent yes\n IdentityFile $RSA_PATH\n\n" >> ~/.ssh/config
@@ -164,7 +168,7 @@ fi
 
 # Add SSH key to ssh-agent
 logN "Adding SSH key to ssh-agent"
-ssh-add -K $RSA_PATH
+ssh-add -K "${RSA_PATH}"
 logC "SSH key added to ssh-agent"
 
 
@@ -173,7 +177,7 @@ if [[ -f ./.git_configured ]]; then
 else
     # Configure Git and GitHub
     logN "Copying SSH Public Key to clipboard \nUse this key to add to your GitHub account in the next step"
-    pbcopy < ${RSA_PATH}.pub
+    pbcopy < "${RSA_PATH}.pub"
 
     GIT_MESSAGE=$(cat <<EOF
 Your default web browser will be opened to a GitHub settings page for adding a new SSH key.

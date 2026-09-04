@@ -115,6 +115,25 @@ string_in_file() {
 }
 
 
+# Expand a leading ~, which read does not do
+expand_tilde() {
+  case "$1" in
+    '~') echo "${HOME}" ;;
+    '~/'*) echo "${HOME}/${1#\~/}" ;;
+    *) echo "$1" ;;
+  esac
+}
+
+
+# Create a directory if it is not already there
+ensure_dir() {
+  if ! [ -d "$1" ]; then
+    mkdir -p "$1"
+    chmod 700 "$1"
+  fi
+}
+
+
 abort() {
   STRAP_STEP=""
   echo "!!! $*" >&2
