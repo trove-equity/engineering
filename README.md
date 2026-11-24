@@ -1,46 +1,57 @@
-# Local Development Pre-Setup Script
+# Pave Engineering Laptop Pre-Setup
 
-Welcome to the Pave Engineering pre-setup repository. This script will install the necessary tools before you can run the local development setup process, including:
-- Brew
-- Podman
-- Visual Studio Code
+Run this once on a new Mac before setting up Pave's local development environment. The script installs and configures:
+
+- Rosetta 2 (Apple Silicon Macs only)
+- Xcode Command Line Tools
+- Homebrew
+- Git, GitHub CLI (`gh`) and `jq`
 - Google Cloud CLI
-- Git
-- Github
-- SSH keys
+- Visual Studio Code
+- An SSH key for GitHub, plus your Git name and email
 
 ## Prerequisites
 
-Before running the setup script, ensure you have the following:
-
-- A GitHub account
 - A Mac laptop
-- Ensure you have Chrome set as your default broswer 
+- A GitHub account that you have signed in to through Okta
+- Chrome set as your default browser
 
-## Setup Instructions
+## Setup instructions
 
-Follow these steps to run the setup script:
+1. **Clone this repository**
 
-1. **Clone the Repository**:
    ```bash
    git clone https://github.com/trove-equity/engineering
    cd engineering
    ```
-2. **Run the Setup Script**:
+
+2. **Run the setup script**
+
    ```bash
    ./setup.sh
    ```
 
-3. **Follow the On-Screen Instructions**:
-   
-   Press Enter to continue when prompted.
-   The script will prompt you for your laptop password at the beginning.
-   Pay attention, because you will be prompted for input. There will also
-   be a step that opens your Github settings for you. You can return to the
-   prompt after that step to continue the setup.
+3. **Follow the prompts**
+
+   - The script asks for your laptop password at the start.
+   - Keep an eye on the terminal: the script stops for input several times.
+   - It opens your GitHub SSH settings in the browser so you can add the new key and authorize it for SSO. Come back to the terminal afterwards to finish.
+
+   The script is safe to run again. Steps that are already done are skipped.
+
+## Next steps
+
+When the script finishes, set up the local development VM by following the [Getting Started section of the tarmac README](https://github.com/trove-equity/tarmac#monorepo-getting-started-first-time-setup). In short:
+
+```bash
+git clone git@github.com:trove-equity/tarmac.git
+cd tarmac
+./local_dev_config.sh
+```
+
+Run `local_dev_config.sh` from your Mac terminal, not inside the VM.
 
 ## Troubleshooting
-Common problems:
-- Permission Issues: Make sure you have the necessary permissions to run the script and install software on your laptop.
 
-Otherwise, please reach out to the Developer Platform team if you get stuck! 
+- **Permission errors:** make sure your account can install software on the laptop.
+- **Anything else:** ask the Developer Platform team for help.
